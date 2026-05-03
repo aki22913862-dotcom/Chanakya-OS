@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHANAKYA OS</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="bootScreen" class="screen active">
+        <div class="boot-container">
+            <div class="boot-logo">
+                <div class="logo-icon">⚡</div>
+                <div class="logo-text">CHANAKYA OS</div>
+            </div>
+            <div class="boot-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text">Initializing system...</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loginScreen" class="screen">
+        <div class="login-container">
+            <div class="login-header">
+                <h1>Welcome to CHANAKYA OS</h1>
+                <p>Please sign in to continue</p>
+            </div>
+            <form class="login-form" onsubmit="return handleAuthSubmit(event)">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter username" autocomplete="username">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter password" autocomplete="current-password">
+                </div>
+                <button type="submit" class="login-btn">Sign In</button>
+                <div class="login-hint">Demo: admin / admin123</div>
+            </form>
+        </div>
+    </div>
+
+    <div id="desktopScreen" class="screen">
+        <div class="desktop-bg" id="desktopBg"></div>
+
+        <div class="desktop-icons">
+            <div class="icon" onclick="launchApp('fileManager')" title="File Manager">
+                <div class="icon-img">📁</div>
+                <div class="icon-label">Files</div>
+            </div>
+            <div class="icon" onclick="launchApp('browser')" title="Web Browser">
+                <div class="icon-img">🌐</div>
+                <div class="icon-label">Browser</div>
+            </div>
+            <div class="icon" onclick="launchApp('terminal')" title="Terminal">
+                <div class="icon-img">💻</div>
+                <div class="icon-label">Terminal</div>
+            </div>
+            <div class="icon" onclick="launchApp('calculator')" title="Calculator">
+                <div class="icon-img">🧮</div>
+                <div class="icon-label">Calculator</div>
+            </div>
+            <div class="icon" onclick="launchApp('notes')" title="Notes App">
+                <div class="icon-img">📝</div>
+                <div class="icon-label">Notes</div>
+            </div>
+            <div class="icon" onclick="launchApp('weather')" title="Weather">
+                <div class="icon-img">☁️</div>
+                <div class="icon-label">Weather</div>
+            </div>
+            <div class="icon" onclick="launchApp('settings')" title="System Settings">
+                <div class="icon-img">⚙️</div>
+                <div class="icon-label">Settings</div>
+            </div>
+        </div>
+
+        <div class="windows-container" id="windowsContainer"></div>
+
+        <div class="taskbar">
+            <div class="taskbar-left">
+                <div class="start-menu-btn" onclick="toggleStartMenu()" title="Start Menu">
+                    <span class="start-icon">⊞</span>
+                    <span class="start-text">Start</span>
+                </div>
+                <div class="taskbar-apps" id="taskbarApps"></div>
+            </div>
+            <div class="taskbar-center">
+                <div class="system-tray">
+                    <div class="tray-icon" onclick="toggleWallpaperMenu()" title="Wallpaper">🖼️</div>
+                    <div class="tray-icon" onclick="toggleNotifications()" title="Notifications">🔔</div>
+                </div>
+            </div>
+            <div class="taskbar-right">
+                <div class="clock" id="clock">00:00</div>
+                <div class="date" id="date">Jan 1, 2024</div>
+            </div>
+        </div>
+
+        <div class="start-menu" id="startMenu">
+            <div class="start-menu-header">
+                <div class="user-info">
+                    <div class="user-avatar">👤</div>
+                    <div class="user-details">
+                        <div class="user-name">Administrator</div>
+                        <div class="user-email">admin@chanakya.os</div>
+                    </div>
+                </div>
+            </div>
+            <div class="start-menu-apps">
+                <div class="start-app" onclick="launchApp('fileManager')">
+                    <div class="start-app-icon">📁</div>
+                    <div class="start-app-info">
+                        <div class="start-app-name">File Manager</div>
+                        <div class="start-app-desc">Manage your files</div>
+                    </div>
+                </div>
+                <div class="start-app" onclick="launchApp('browser')">
+                    <div class="start-app-icon">🌐</div>
+                    <div class="start-app-info">
+                        <div class="start-app-name">Web Browser</div>
+                        <div class="start-app-desc">Browse the internet</div>
+                    </div>
+                </div>
+                <div class="start-app" onclick="launchApp('terminal')">
+                    <div class="start-app-icon">💻</div>
+                    <div class="start-app-info">
+                        <div class="start-app-name">Terminal</div>
+                        <div class="start-app-desc">Command line interface</div>
+                    </div>
+                </div>
+                <div class="start-app" onclick="launchApp('calculator')">
+                    <div class="start-app-icon">🧮</div>
+                    <div class="start-app-info">
+                        <div class="start-app-name">Calculator</div>
+                        <div class="start-app-desc">Perform calculations</div>
+                    </div>
+                </div>
+                <div class="start-app" onclick="launchApp('notes')">
+                    <div class="start-app-icon">📝</div>
+                    <div class="start-app-info">
+                        <div class="start-app-name">Notes</div>
+                        <div class="start-app-desc">Take notes</div>
+                    </div>
+                </div>
+                <div class="start-app" onclick="launchApp('weather')">
+                    <div class="start-app-icon">☁️</div>
+                    <div class="start-app-info">
+                        <div class="start-app-name">Weather</div>
+                        <div class="start-app-desc">Live weather reports</div>
+                    </div>
+                </div>
+                <div class="start-app" onclick="launchApp('settings')">
+                    <div class="start-app-icon">⚙️</div>
+                    <div class="start-app-info">
+                        <div class="start-app-name">Settings</div>
+                        <div class="start-app-desc">System preferences</div>
+                    </div>
+                </div>
+            </div>
+            <div class="start-menu-footer">
+                <div class="power-options">
+                    <button class="power-btn shutdown" onclick="systemShutdown()" title="Shutdown">⏻</button>
+                    <button class="power-btn restart" onclick="systemRestart()" title="Restart">↻</button>
+                    <button class="power-btn sleep" onclick="systemSleep()" title="Sleep">☾</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="wallpaper-menu" id="wallpaperMenu">
+            <div class="menu-header">Change Wallpaper</div>
+            <div class="wallpaper-options">
+                <div class="wallpaper-option" onclick="applyWallpaper('default')">
+                    <div class="wallpaper-preview default-bg"></div>
+                    <div class="wallpaper-name">Default</div>
+                </div>
+                <div class="wallpaper-option" onclick="applyWallpaper('cyberpunk')">
+                    <div class="wallpaper-preview cyberpunk"></div>
+                    <div class="wallpaper-name">Cyberpunk</div>
+                </div>
+                <div class="wallpaper-option" onclick="applyWallpaper('techwear')">
+                    <div class="wallpaper-preview techwear"></div>
+                    <div class="wallpaper-name">Techwear</div>
+                </div>
+                <div class="wallpaper-option" onclick="applyWallpaper('neoncity')">
+                    <div class="wallpaper-preview neoncity"></div>
+                    <div class="wallpaper-name">Neon City</div>
+                </div>
+                <div class="wallpaper-option" onclick="applyWallpaper('cyberpunk')">
+                    <div class="wallpaper-preview cyberpunk"></div>
+                    <div class="wallpaper-name">Cyberpunk Alt</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="notifications-panel" id="notificationsPanel">
+            <div class="notifications-header">
+                <h3>Notifications</h3>
+                <button class="clear-all-btn" onclick="clearAllNotifications()">Clear All</button>
+            </div>
+            <div class="notifications-list" id="notificationsList">
+                <div class="notification-item">
+                    <div class="notification-icon">ℹ️</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Welcome to CHANAKYA OS</div>
+                        <div class="notification-message">Your system is ready to use</div>
+                        <div class="notification-time">Just now</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
